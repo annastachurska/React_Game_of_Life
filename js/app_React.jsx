@@ -6,13 +6,67 @@ document.addEventListener("DOMContentLoaded", function(){
     let maxWidth = Math.floor(window.innerWidth/10) - 20;
     let maxHeight = Math.floor(window.innerHeight/10) - 20;
 
+    class GameBoard extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        handleMouseOver = (e) => {
+            if (e.target.className.indexOf("live") == -1) {
+                e.target.classList.add("live");
+            } else {
+                e.target.classList.remove("live");
+            }
+        }
+
+        render(){
+            let boardWidthStyle = String(this.props.width * 10) + "px";
+            let boardHeightStyle = String(this.props.height * 10) + "px";
+            const styleBoard = {width: boardWidthStyle, height:boardHeightStyle};
+            const numberOfElements = this.props.width * this.props.height;
+            const cells = Array(numberOfElements).fill().map((el, index) => {
+                return <div key={index} onMouseOver={this.handleMouseOver}></div>
+            });
+            return(
+                <section style={styleBoard} id="board">
+                    {cells}
+                </section>
+            )
+        }
+    }
+
+    class GameMenu extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        handlePlayClick = (e) => {
+            this.props.play(e);
+        }
+
+        handlePauseClick = (e) => {
+            this.props.pause(e);
+        }
+
+        handleResetClick = (e) => {
+            this.props.reset(e);
+        }
+
+        render(){
+            return(
+                <section id="game-menu">
+                    <button id="play" onClick={this.handlePlayClick}>Play</button>
+                    <button id="pause" onClick={this.handlePauseClick}>Pause</button>
+                    <button id="reset" onClick={this.handleResetClick}>Reset the game</button>
+                </section>
+            )
+        }
+
+    }
+
     class Game extends React.Component{
         constructor(props){
             super(props);
-            this.state = {
-                width: this.props.width,
-                height: this.props.height
-            }
         }
 
         createCellArray = () => {
@@ -29,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 this.cellIndex(x,y).classList.toggle(state);
             }
         }
-
 
         computeCellNextState = (x,y) => {
             const neighbourArray =[];
@@ -104,14 +157,6 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
 
-        handleMouseOver = (e) => {
-            if (e.target.className.indexOf("live") == -1) {
-                e.target.classList.add("live");
-            } else {
-                e.target.classList.remove("live");
-            }
-        }
-
         handlePlayClick = (e) => {
             e.target.setAttribute('disabled',true);
             this.createCellArray();
@@ -137,35 +182,11 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
 
-        componentDidMount(){
-            this.setState({
-                width: this.props.width,
-                height: this.props.height
-            })
-        }
-
-
         render(){
-            let boardWidthStyle = String(this.props.width * 10) + "px";
-            let boardHeightStyle = String(this.props.height * 10) + "px";
-            const styleBoard = {width: boardWidthStyle, height:boardHeightStyle};
-
-            const numberOfElements = this.props.width * this.props.height;
-
-            const cells = Array(numberOfElements).fill().map((el, index) => {
-                return <div key={index} onMouseOver={this.handleMouseOver}></div>
-            });
-
             return(
                 <section className="flex-container">
-                    <section style={styleBoard} id="board">
-                        {cells}
-                    </section>
-                    <section id="game-menu">
-                        <button id="play" onClick={this.handlePlayClick}>Play</button>
-                        <button id="pause" onClick={this.handlePauseClick}>Pause</button>
-                        <button id="reset" onClick={this.handleResetClick}>Reset the game</button>
-                    </section>
+                    <GameBoard width={this.props.width} height={this.props.height}/>
+                    <GameMenu width={this.props.width} height={this.props.height} play={this.handlePlayClick} pause={this.handlePauseClick} reset={this.handleResetClick}/>
                 </section>
             )
         }
@@ -219,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     <IntroductionTitle />
                     <IntroductionDescription />
                     <button className="introduction_button" onClick={this.handleStartButton}>Start the game</button>
-            </section>
+                </section>
             )
         }
     }
@@ -252,7 +273,6 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         render(){
-            console.log('intro', this.state.widthSize);
             return (
                 <section>
                     <Introduction startBtn={this.handleStartButton} displayStyle={this.state.introductionDisplay}/>
