@@ -182,6 +182,10 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
 
+        componentWillUnmount(){
+            clearInterval(this.idSetInterval);
+        }
+
         render(){
             return(
                 <section className="flex-container">
