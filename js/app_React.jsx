@@ -261,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         handleStartButton = () => {
+
             let widthSize = prompt("Set the board width (1 to " + maxWidth + ")");
             while ( !( (Number(widthSize) > 0) && (Number(widthSize) <= maxWidth) ) ){
                 widthSize = prompt("Chosen width must be from 1 to "+ maxWidth + "\n Set the board width");
@@ -269,6 +270,8 @@ document.addEventListener("DOMContentLoaded", function(){
             while ( !( (Number(heightSize) > 0) && (Number(heightSize) <= maxHeight) ) ){
                 heightSize = prompt("Chosen height must be from 1 to "+ maxHeight + "\n Set the board height");
             }
+            document.querySelector('#game-menu').style.display = 'block';
+            document.querySelector('#board').style.display = 'block';
             this.setState({
                 widthSize: Number(widthSize),
                 heightSize: Number(heightSize),

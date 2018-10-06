@@ -1,12 +1,14 @@
 /*reset */
 * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* styling of whole webpage */
 body {
-    margin: 0;
-    padding: 0;
     background-color: #cccccc;
 }
 
@@ -22,20 +24,15 @@ body {
 }
 
 /* styling of the introduction title */
-.introduction_title{
-    margin: 50px 0;
-}
 .introduction_title_item{
+    margin: 50px 0;
     font-size: 3rem;
 }
 
 /*styling of the introduction description */
-.introduction_description{
-    font-size: 1.3rem;
-}
-
 .introduction_description_item{
     margin: 50px 50px;
+    font-size: 1.3rem;
 }
 
 /*styling of the introduction button */
@@ -48,17 +45,13 @@ body {
     height: 50px;
 }
 
-/* styling if the game part */
-.flex-container{
-    z-index: 1;
-}
-
 /* styling of board */
 #board {
     margin: 50px auto 0;
     min-height: 100px;
     min-width: 100px;
     position: relative;
+    display: none;
 }
 
 /* styling of board elements */
@@ -77,8 +70,14 @@ body {
 
 /* styling of game menu containing play and pause buttons */
 #game-menu {
+    display: none;
     margin: 50px auto;
     width: auto;
     position: absolute;
     left: 50%;
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 }

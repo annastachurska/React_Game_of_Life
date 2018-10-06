@@ -16,4 +16,4 @@ If cell is dead it starts to live when it is surrounded by 3 living cells.
 **Features**
 The game can be stopped, reset and played by clicking the proper buttons.
 
-**Status:** completed.
+**Status:** completed
