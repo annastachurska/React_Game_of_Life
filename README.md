@@ -2,7 +2,7 @@
 
 Game of life from my other repository written in React.
 
-***Technology*** HTML5, CSS3, JS, ES6, React, Webpack
+***Technology*** HTML5, CSS3, JS, ES6, React, Webpack, npm and Babel-loader.
 
 ***Instalation*** Webpack, NodeJS and React are required.
 Webpack information: loader: babel-loader; presets: es2015, stage-2, react.
